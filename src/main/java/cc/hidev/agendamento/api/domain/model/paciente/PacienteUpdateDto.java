@@ -1,6 +1,6 @@
-package cc.hidev.agendamento.api.model.paciente;
+package cc.hidev.agendamento.api.domain.model.paciente;
 
-import cc.hidev.agendamento.api.model.endereco.EnderecoDto;
+import cc.hidev.agendamento.api.domain.model.endereco.EnderecoDto;
 import jakarta.validation.constraints.NotNull;
 
 public record PacienteUpdateDto(

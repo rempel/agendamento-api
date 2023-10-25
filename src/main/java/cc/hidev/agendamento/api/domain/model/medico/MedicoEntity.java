@@ -1,7 +1,6 @@
-package cc.hidev.agendamento.api.model.medico;
+package cc.hidev.agendamento.api.domain.model.medico;
 
-import cc.hidev.agendamento.api.model.endereco.EnderecoDto;
-import cc.hidev.agendamento.api.model.endereco.EnderecoEntity;
+import cc.hidev.agendamento.api.domain.model.endereco.EnderecoEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

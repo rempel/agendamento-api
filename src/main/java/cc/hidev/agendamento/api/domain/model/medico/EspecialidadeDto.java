@@ -1,4 +1,4 @@
-package cc.hidev.agendamento.api.model.medico;
+package cc.hidev.agendamento.api.domain.model.medico;
 
 public enum EspecialidadeDto {
     ORTOPEDIA,

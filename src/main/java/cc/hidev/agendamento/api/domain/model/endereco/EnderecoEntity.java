@@ -1,4 +1,4 @@
-package cc.hidev.agendamento.api.model.endereco;
+package cc.hidev.agendamento.api.domain.model.endereco;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

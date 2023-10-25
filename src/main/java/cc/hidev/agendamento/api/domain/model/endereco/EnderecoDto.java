@@ -1,4 +1,4 @@
-package cc.hidev.agendamento.api.model.endereco;
+package cc.hidev.agendamento.api.domain.model.endereco;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
