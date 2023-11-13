@@ -21,6 +21,7 @@ public class MedicoEntity {
     private String email;
     private String telefone;
     private String crm;
+    private Boolean ativo;
 
     @Enumerated(EnumType.STRING)
     private EspecialidadeDto especialidade;
@@ -33,6 +34,7 @@ public class MedicoEntity {
         this.email = medico.email();
         this.telefone = medico.telefone();
         this.crm = medico.crm();
+        this.ativo = true;
         this.especialidade = medico.especialidade();
         this.endereco = new EnderecoEntity(medico.endereco());
     }
@@ -53,5 +55,9 @@ public class MedicoEntity {
         if (medico.endereco() != null) {
             this.endereco.update(medico.endereco());
         }
+    }
+
+    public void delete() {
+        this.ativo = false;
     }
 }

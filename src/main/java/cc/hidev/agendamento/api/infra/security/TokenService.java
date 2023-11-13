@@ -22,6 +22,9 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
+    @Value("${api.security.token.expires.hours}")
+    private Integer hours;
+
     public String generateToken(UsuarioEntity user) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
@@ -49,7 +52,7 @@ public class TokenService {
     }
 
     private Instant expiresDate() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusHours(hours).toInstant(ZoneOffset.of("-03:00"));
     }
 
 }

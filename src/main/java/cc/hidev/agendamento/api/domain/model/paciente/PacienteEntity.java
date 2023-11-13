@@ -23,6 +23,7 @@ public class PacienteEntity {
     private String email;
     private String telefone;
     private String cpf;
+    private Boolean ativo;
 
     @NotNull
     @Valid EnderecoEntity endereco;
@@ -32,6 +33,7 @@ public class PacienteEntity {
         this.email = paciente.email();
         this.telefone = paciente.telefone();
         this.cpf = paciente.cpf();
+        this.ativo = true;
         this.endereco = new EnderecoEntity(paciente.endereco());
     }
 
@@ -51,5 +53,9 @@ public class PacienteEntity {
         if (paciente.endereco() != null) {
             this.endereco.update(paciente.endereco());
         }
+    }
+
+    public void delete() {
+        this.ativo = false;
     }
 }
