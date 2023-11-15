@@ -2,7 +2,6 @@ package cc.hidev.agendamento.api.controller.consulta;
 
 import cc.hidev.agendamento.api.domain.model.consulta.ConsultaCancelDto;
 import cc.hidev.agendamento.api.domain.model.consulta.ConsultaCreateDto;
-import cc.hidev.agendamento.api.domain.model.consulta.ConsultaListDto;
 import cc.hidev.agendamento.api.service.consulta.ConsultaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,8 @@ public class ConsultaController {
     @PostMapping
     @Transactional
     public ResponseEntity create(@RequestBody @Valid ConsultaCreateDto consultaCreateDto) {
-        consultaService.agendar(consultaCreateDto);
-
-        return ResponseEntity.ok(new ConsultaListDto(null, null, null, null));
+        var consultaListDto = consultaService.agendar(consultaCreateDto);
+        return ResponseEntity.ok(consultaListDto);
     }
 
     @DeleteMapping

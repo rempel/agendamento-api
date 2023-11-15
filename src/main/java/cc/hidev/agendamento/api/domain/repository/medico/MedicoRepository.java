@@ -10,19 +10,29 @@ import java.time.LocalDateTime;
 public interface MedicoRepository extends JpaRepository<MedicoEntity, Long> {
 
     @Query("""
-            select m from MedicoEntity m
+            select m
+            from MedicoEntity m
             where 
             m.ativo = true
             and
             m.especialidade = :especialidade
             and
             m.id not in(
-                select c.medico.id from ConsultaEntity c
-                where
-                c.data = :data
+            select c.medico.id from ConsultaEntity c
+            where
+            c.data = :data
             )
             order by rand()
             limit 1
             """)
     MedicoEntity medicoAleatorioEspecialidadeNaData(EspecialidadeDto especialidade, LocalDateTime data);
+
+    @Query("""
+            select m.ativo
+            from MedicoEntity m
+            where
+            m.id = :id
+            """)
+    boolean findAtivoById(Long id);
+
 }

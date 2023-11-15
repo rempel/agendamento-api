@@ -26,11 +26,9 @@ public class AuthenticationController {
 
     @PostMapping
     public ResponseEntity makeAuth(@RequestBody @Valid AuthenticationDto auth) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(auth.username(), auth.password());
+        var authenticationToken = new UsernamePasswordAuthenticationToken(auth.username(), auth.password());
         var authentication = manager.authenticate(authenticationToken);
-
-        String tokenJWT = tokenService.generateToken((UsuarioEntity) authentication.getPrincipal());
-
+        var tokenJWT = tokenService.generateToken((UsuarioEntity) authentication.getPrincipal());
         return ResponseEntity.ok(new TokenJWTDto(tokenJWT));
     }
 }

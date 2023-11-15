@@ -7,8 +7,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.List;
-
 @RestControllerAdvice
 public class ErrorHandler {
 
@@ -19,8 +17,13 @@ public class ErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity errorHandler400(MethodArgumentNotValidException exception) {
-        List<FieldError> errors = exception.getFieldErrors();
+        var errors = exception.getFieldErrors();
         return ResponseEntity.badRequest().body(errors.stream().map(ErrorValidation::new).toList());
+    }
+
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity errorHandlerBusinessRules(ValidacaoException exception) {
+        return ResponseEntity.badRequest().body(exception.getMessage());
     }
 
     private record ErrorValidation(String field, String message) {

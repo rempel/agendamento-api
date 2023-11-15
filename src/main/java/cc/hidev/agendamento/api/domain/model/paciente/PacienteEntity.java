@@ -58,4 +58,5 @@ public class PacienteEntity {
     public void delete() {
         this.ativo = false;
     }
+
 }

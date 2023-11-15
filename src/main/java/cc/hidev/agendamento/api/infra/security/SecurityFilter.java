@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -25,12 +24,11 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String tokenJWT = getBearerToken(request);
+        var tokenJWT = getBearerToken(request);
 
         if (tokenJWT != null) {
-            String subject = tokenService.getSubject(tokenJWT);
-            UserDetails usuario = repository.findByUsername(subject);
-
+            var subject = tokenService.getSubject(tokenJWT);
+            var usuario = repository.findByUsername(subject);
             var authorization = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(authorization);
@@ -40,7 +38,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
     private String getBearerToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
+        var bearerToken = request.getHeader("Authorization");
         if (bearerToken != null) {
             return bearerToken.replace("Bearer ", "");
         }

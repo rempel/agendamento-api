@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -28,48 +27,42 @@ public class MedicoController {
     @PostMapping
     @Transactional
     public ResponseEntity create(@RequestBody @Valid MedicoCreateDto medicoCreateDto, UriComponentsBuilder uriBuilder) {
-        MedicoEntity medico = repository.save(new MedicoEntity(medicoCreateDto));
-
-        URI uri = uriBuilder.path("/medico/{id}").buildAndExpand(medico.getId()).toUri();
-
+        var medico = repository.save(new MedicoEntity(medicoCreateDto));
+        var uri = uriBuilder.path("/medico/{id}").buildAndExpand(medico.getId()).toUri();
         return ResponseEntity.created(uri).body(new MedicoListDto(medico));
     }
 
     @GetMapping
     public ResponseEntity<Page<MedicoListDto>> list(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginate) {
-        Page<MedicoListDto> medicosCollection = repository.findAll(paginate).map(MedicoListDto::new);
-
+        var medicosCollection = repository.findAll(paginate).map(MedicoListDto::new);
         return ResponseEntity.ok(medicosCollection);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<MedicoListDto>> listAll() {
-        List<MedicoListDto> medicoCollection =  repository.findAll().stream().map(MedicoListDto::new).toList();
-
+        var medicoCollection =  repository.findAll().stream().map(MedicoListDto::new).toList();
         return ResponseEntity.ok(medicoCollection);
     }
 
     @PutMapping
     @Transactional
     public ResponseEntity update(@RequestBody @Valid MedicoUpdateDto medico) {
-        MedicoEntity medicoToUpdate = repository.getReferenceById(medico.id());
+        var medicoToUpdate = repository.getReferenceById(medico.id());
         medicoToUpdate.update(medico);
-
         return ResponseEntity.ok(new MedicoListDto(medicoToUpdate));
     }
 
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity delete(@PathVariable Long id) {
-        MedicoEntity medico = repository.getReferenceById(id);
+        var medico = repository.getReferenceById(id);
         medico.delete();
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity read(@PathVariable Long id) {
-        MedicoEntity medico = repository.getReferenceById(id);
-
+        var medico = repository.getReferenceById(id);
         return ResponseEntity.ok(new MedicoListDto(medico));
     }
 }
