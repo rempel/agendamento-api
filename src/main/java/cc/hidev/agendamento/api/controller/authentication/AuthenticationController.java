@@ -4,6 +4,7 @@ import cc.hidev.agendamento.api.domain.model.authentication.AuthenticationDto;
 import cc.hidev.agendamento.api.domain.model.authentication.TokenJWTDto;
 import cc.hidev.agendamento.api.domain.model.usuario.UsuarioEntity;
 import cc.hidev.agendamento.api.infra.security.TokenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

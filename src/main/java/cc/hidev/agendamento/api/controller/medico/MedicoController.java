@@ -5,6 +5,7 @@ import cc.hidev.agendamento.api.domain.model.medico.MedicoEntity;
 import cc.hidev.agendamento.api.domain.model.medico.MedicoListDto;
 import cc.hidev.agendamento.api.domain.model.medico.MedicoUpdateDto;
 import cc.hidev.agendamento.api.domain.repository.medico.MedicoRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/medico")
+@SecurityRequirement(name = "bearer-key")
 public class MedicoController {
 
     @Autowired

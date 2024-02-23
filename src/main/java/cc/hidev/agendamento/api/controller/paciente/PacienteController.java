@@ -5,6 +5,7 @@ import cc.hidev.agendamento.api.domain.model.paciente.PacienteEntity;
 import cc.hidev.agendamento.api.domain.model.paciente.PacienteListDto;
 import cc.hidev.agendamento.api.domain.model.paciente.PacienteUpdateDto;
 import cc.hidev.agendamento.api.domain.repository.paciente.PacienteRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/paciente")
+@SecurityRequirement(name = "bearer-key")
 public class PacienteController {
 
     @Autowired

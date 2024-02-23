@@ -3,6 +3,7 @@ package cc.hidev.agendamento.api.controller.consulta;
 import cc.hidev.agendamento.api.domain.model.consulta.ConsultaCancelDto;
 import cc.hidev.agendamento.api.domain.model.consulta.ConsultaCreateDto;
 import cc.hidev.agendamento.api.service.consulta.ConsultaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("consulta")
+@SecurityRequirement(name = "bearer-key")
 public class ConsultaController {
 
     @Autowired
